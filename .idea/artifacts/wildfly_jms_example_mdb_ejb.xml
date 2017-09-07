@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="ejb-jar" name="wildfly_jms_example_mdb:ejb">
-    <output-path>$PROJECT_DIR$/wildfly_jms_example_mdb/target</output-path>
-    <root id="archive" name="wildfly_jms_example_mdb-1.0.jar">
-      <element id="artifact" artifact-name="wildfly_jms_example_mdb:ejb exploded" />
-    </root>
-  </artifact>
-</component>
