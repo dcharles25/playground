@@ -20,7 +20,7 @@ public class JMSMessageService {
 
     @GET
     public Response getJMSMessage() {
-        return Response.accepted("This better not work!").build();
+        return Response.accepted("JMS Example ready to rock! Trying posting a message.").build();
     }
 
     @POST
