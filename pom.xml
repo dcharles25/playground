@@ -1,0 +1,118 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.jms.example</groupId>
+    <artifactId>wildfly_jms_example</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>wildfly_jms_example</name>
+    <modules>
+        <module>wildfly_jms_exampleEAR</module>
+        <module>wildfly_jms_example_web</module>
+        <module>wildfly_jms_example_mdb</module>
+    </modules>
+    <properties>
+        <!--  encoding-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--java version -->
+        <java-version>1.8</java-version>
+
+        <!-- App Server and JDK locations -->
+        <jboss-home>C:\App Servers\wildfly-10.1.0.Final</jboss-home>
+        <java-home>C:\Program Files\Java\jdk1.8.0_144</java-home>
+
+        <!-- plugin versions -->
+        <ejb-plugin-version>3.0.0</ejb-plugin-version>
+        <war-plugin-version>3.1.0</war-plugin-version>
+        <ear-plugin-version>2.10.1</ear-plugin-version>
+        <compiler-plugin-version>3.6.2</compiler-plugin-version>
+
+        <!-- dependency versions -->
+        <javaee-api-version>7.0</javaee-api-version>
+        <junit-version>3.8.1</junit-version>
+
+        <!-- EJB spec version -->
+        <ejb-spec-version>3.2</ejb-spec-version>
+
+        <!-- Wildfly version -->
+        <wildfly-plugin-version>1.2.0.Final</wildfly-plugin-version>
+    </properties>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${compiler-plugin-version}</version>
+                    <configuration>
+                        <source>${java-version}</source>
+                        <target>${java-version}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+
+                <!-- Wildfly plugin -->
+                <plugin>
+                    <groupId>org.wildfly.plugins</groupId>
+                    <artifactId>wildfly-maven-plugin</artifactId>
+                    <version>${wildfly-plugin-version}</version>
+                    <configuration>
+                        <java-home>${java-home}</java-home>
+                        <jboss-home>${jboss-home}</jboss-home>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+
+                <!-- EJB Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ejb-plugin</artifactId>
+                    <version>${ejb-plugin-version}</version>
+                    <configuration>
+                        <ejbVersion>${ejb-spec-version}</ejbVersion>
+                    </configuration>
+                </plugin>
+
+                <!-- WAR plugin: skinny WAR definition -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${war-plugin-version}</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>lib/</classpathPrefix>
+                            </manifest>
+                        </archive>
+                        <webResources>
+                            <resource>
+                                <filtering>true</filtering>
+                                <directory>src/main/webapp</directory>
+                                <includes>
+                                    <include>**/web.xml</include>
+                                </includes>
+                            </resource>
+                        </webResources>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>${javaee-api-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit-version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="ear" name="wildfly_jms_exampleEAR:ear">
+    <output-path>$PROJECT_DIR$/wildfly_jms_exampleEAR/target</output-path>
+    <root id="archive" name="wildfly_jms_exampleEAR.ear" />
+  </artifact>
+</component>
